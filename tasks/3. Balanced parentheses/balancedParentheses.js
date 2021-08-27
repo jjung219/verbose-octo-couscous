@@ -1,15 +1,16 @@
 export function areParenthesesBalanced(inputString) {
   // TODO: write your code here
-  if (inputString[0] === ')') return false;
-  if (inputString[0] === '(' && inputString.length > 2 && inputString[1] === ')') return false;
-  if (inputString[inputString.length - 1] === '(') return false;
+  const paren = [];
 
-  let noOfLeft = 0;
-  let noOfRight = 0;
-  for (let i = 1; i < inputString.length - 1; i++) {
-    if (inputString[i] === '(') noOfLeft++;
-    if (inputString[i] === ')') noOfRight++;
+  for (let i = 0; i < inputString.length; i++) {
+    if (inputString[i] === '(') {
+      paren.push('(');
+    }
+    if (inputString[i] === ')') {
+      if (paren.length === 0) return false;
+      paren.pop();
+    }
   }
 
-  return noOfLeft === noOfRight;
+  return paren.length === 0;
 }
